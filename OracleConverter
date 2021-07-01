@@ -1,0 +1,88 @@
+Sub Arranger()
+'
+' Arranger Macro
+'
+    'Time Measurer
+    Dim StartTime As Double
+    Dim SecondsElapsed As Double
+    
+    StartTime = Timer
+    
+    Application.ScreenUpdating = False
+    Sheets("WIP").Visible = True
+    
+    'Output Clear
+    Sheets("Output").Select
+    Range("A2:T2").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Selection.ClearContents
+    
+    'Input Data formula drag down
+    Sheets("Input").Select
+    Range("B1048576").Select
+    Selection.End(xlUp).Select
+    lastRow = ActiveCell.Row
+    
+    Range("A6").Select
+    Selection.Copy
+    Cells(lastRow, 1).Select
+    Range(Selection, Selection.End(xlUp)).Select
+    Selection.PasteSpecial Paste:=xlPasteFormulas, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+        
+    Range("C6:V6").Select
+    Selection.Copy
+    Cells(lastRow, 3).Select
+    Range(Selection, Selection.End(xlUp)).Select
+    Selection.PasteSpecial Paste:=xlPasteFormulas, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    
+    'Copy Input for WIP
+    Sheets("Input").Select
+    Range(Cells(2, 3), Cells(lastRow, 22)).Select
+    Selection.Copy
+    
+    'Paste Input into WIP
+    Sheets("WIP").Select
+    Range("A1").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    
+    'Filter WIP'
+    ActiveSheet.Range("$A$1:$T$1048576").AutoFilter Field:=20, Criteria1:="<>"
+    Range("A1:T1").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    
+    'Copy WIP
+    Range(Selection, Selection.End(xlDown)).Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    
+    'Paste WIP
+    Sheets("Output").Select
+    Range("A1").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+        
+    Range("A1").Select
+    finalRow = Selection.End(xlDown).Row
+        
+    'WIP unhide and Clear
+    On Error Resume Next
+    Sheets("WIP").Select
+    Sheets("WIP").Select.ShowAllData
+    Range("A2:T1048576").Select
+    Selection.ClearContents
+    Sheets("WIP").Visible = False
+    
+    'Input clear
+    Sheets("Input").Select
+    Range(Cells(7, 3), Cells(lastRow, 22)).Select
+    Selection.ClearContents
+    
+    'Outro setup
+    Sheets("Output").Select
+    SecondsElapsed = Round(Timer - StartTime, 2)
+    MsgBox ("Oracle convert complete!" & vbNewLine & "Time elapsed:  " & SecondsElapsed & " seconds" & vbNewLine & "Transactions processed:  " & finalRow)
+        
+End Sub
