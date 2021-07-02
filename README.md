@@ -1,9 +1,9 @@
 # VBA
-VBA workpapers created to ease office work 
+VBA workpapers created to ease office work - mainly relating to manual processes
 
 
 ## OracleConverter
-Used in financial institution making 50x faster and efficient extraction of Oracle txt data into usable spreadsheet
+Used in financial institution making extraction of Oracle txt data into usable spreadsheet in 50x the original macro design and no loss in fidelity.
 
 ###Worksheet "Input"
 
@@ -57,7 +57,7 @@ Segment,Cost Centre,Account,Categories,State,Product,Class,Channel,Project,Inter
 
 
 ## MakeCSV
-
+TBC
 
 
 
