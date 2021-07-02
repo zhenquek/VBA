@@ -2,8 +2,8 @@
 VBA workpapers created to ease office work 
 
 
-## OracleConvertor
-Used in financial institution making 50x faster and efficient
+## OracleConverter
+Used in financial institution making 50x faster and efficient extraction of Oracle txt data into usable spreadsheet
 
 ###Worksheet "Input"
 
