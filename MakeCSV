@@ -1,0 +1,101 @@
+Sub MakeCSV()
+'
+' MakeCSV Macro
+'
+    Dim filepath As String, filepathname As String, myname As String
+    
+    filepath = Application.ActiveWorkbook.Path
+    myname = Sheets("ReadMe").Range("C32")
+    filepathname = filepath & "\" & myname & ".csv"
+    MsgBox (filepathname)
+    
+    
+    Sheets("Employee Monthly Information").Select
+    ActiveSheet.Range("$A$14:$W$2500").AutoFilter Field:=2, Criteria1:="<>"
+    ActiveSheet.Range("$A$14:$W$2500").AutoFilter Field:=10, Criteria1:="<>0"
+    
+    Range("A15:W15").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Selection.Copy
+    Workbooks.Add
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+        
+    ActiveWorkbook.SaveAs Filename:= _
+    filepathname, FileFormat:=xlCSV, CreateBackup:=False
+    
+End Sub
+Sub ClearCSVRawData()
+'
+' ClearCSVdo Macro
+'
+    Range("B3:Z3").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Selection.ClearContents
+    Range("B3").Select
+    MsgBox ("Previous Raw Data cleared successfully")
+End Sub
+Sub ClearCSVdo()
+'
+' ClearCSVdo Macro
+'
+    Range("A2:O2").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Selection.ClearContents
+    Range("A2").Select
+    MsgBox ("Previous Raw Data cleared successfully")
+End Sub
+Sub EMS_First()
+'
+' EMS_First Macro
+    Sheets("ReadMe").Select
+    Range("C16").Value = 1
+    
+    Sheets("Raw Data").Select
+    Call ClearCSVRawData
+    
+    Sheets("EMS - First Half").Select
+    Range("A2:L2").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    ActiveWindow.SmallScroll Down:=12
+    Selection.Copy
+    
+    Sheets("Raw Data").Select
+    Range("B3").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Employee Monthly Information").Select
+    Call MakeCSV
+    
+End Sub
+Sub EMS_Second()
+'
+' EMS_First Macro
+    Sheets("ReadMe").Select
+    Range("C16").Value = 2
+    
+    Sheets("Raw Data").Select
+    Call ClearCSVRawData
+    
+    Sheets("EMS - Second Half").Select
+    Range("A2:L2").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    ActiveWindow.SmallScroll Down:=12
+    Selection.Copy
+    
+    Sheets("Raw Data").Select
+    Range("B3").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Sheets("Employee Monthly Information").Select
+    Call MakeCSV
+    
+End Sub
+Sub make2()
+'
+' make2 Macro
+'
+    Range("C16").Select
+    ActiveCell.FormulaR1C1 = "2"
+    Range("C17").Select
+End Sub
