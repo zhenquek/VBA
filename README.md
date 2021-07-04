@@ -1,7 +1,3 @@
-# VBA
-VBA workpapers created to ease office work - mainly relating to manual processes
-
-
 ## OracleConverter
 Used in financial institution making extraction of Oracle txt data into usable spreadsheet in 50x the original macro design and no loss in fidelity.
 
