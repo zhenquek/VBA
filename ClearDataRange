@@ -1,0 +1,9 @@
+Sub ClearPriorData()
+'
+' (1) SELECT AND CLEAR DATA RANGE - A1:X2500
+    Range("A1:X2500").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Selection.ClearContents
+    MsgBox ("Cleared successfully")
+    
+End Sub
